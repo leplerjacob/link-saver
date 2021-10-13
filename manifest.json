@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "description": "Save links, text, emails, etc",
+  "name": "Link Saver",
+  "version": "1.0",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/clipboard-16.png",
+      "32": "/images/clipboard-32.png",
+      "48": "/images/clipboard-48.png",
+      "128": "/images/clipboard-128.png"
+    },
+    "icons": {
+      "16": "/images/clipboard-16.png",
+      "32": "/images/clipboard-32.png",
+      "48": "/images/clipboard-48.png",
+      "128": "/images/clipboard-128.png"
+    }
+  }
+}
