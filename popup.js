@@ -17,14 +17,14 @@ function insertClip() {}
 
 function addDetailsInput() {
   // Allows only one input box to show
-  if (clipboard.querySelector("input.edit")) {
+  if (clipboard.querySelector(".edit")) {
     return;
   } else {
     let tr = document.createElement("tr");
     let inputKey = document.createElement("input");
-    inputKey.class = "input-key edit";
+    inputKey.classList.add("input-key", "edit");
     let inputValue = document.createElement("input");
-    inputValue.class = "input-value edit";
+    inputValue.classList.add("input-value", "edit");
     inputValue.addEventListener("keyup", async (e) => {
       if (inputValue.value != "" && e.code == "Enter") {
         await chrome.storage.sync.set(
@@ -56,8 +56,8 @@ function addStorageItemsToList(items) {
 function listItem(key, value) {
   let tr = document.createElement("tr");
   let inputKey = document.createElement("input");
-  inputKey.class = "input-key";
-  inputKey.disabled;
+  inputKey.classList.add("input-key");
+  inputKey.readOnly = true;
   inputKey.value = key;
 
   let inputValue = document.createElement("input");
@@ -67,20 +67,22 @@ function listItem(key, value) {
       copiedAlert();
     });
   });
-  inputValue.disabled;
-  inputValue.class = "input-value";
+  inputKey.classList.add("input-value");
+  inputValue.readOnly = true;
   inputValue.value = value;
 
   tr.append(inputKey, inputValue);
   return tr;
 }
 
+let timer;
+
 function copiedAlert() {
   notify.classList.remove("hide");
   notify.classList.add("show");
 
-  setTimeout(() => {
+  timer = setTimeout(() => {
     notify.classList.remove("show");
     notify.classList.add("hide");
-  }, 5000);
+  }, 2000);
 }
