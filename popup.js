@@ -21,9 +21,28 @@ function addDetailsInput() {
     return;
   } else {
     let tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td><input class="input-key edit"/></td><td><input class="input-value edit"/></td>
-    `;
+    let inputKey = document.createElement("input");
+    inputKey.class = "input-key edit";
+    let inputValue = document.createElement("input");
+    inputValue.class = "input-value edit";
+    inputValue.addEventListener("keyup", async (e) => {
+      if (inputValue.value != "" && e.code == "Enter") {
+        await chrome.storage.sync.set(
+          { [`${inputKey.value}`]: inputValue.value },
+          function (result) {
+            // console.log('Value currently is ' + result.key)
+            addStorageItemsToList(result);
+          }
+        );
+        clipboard.innerHTML = "";
+        await chrome.storage.sync.get(null, function (result) {
+          // console.log('Value currently is ' + result.key)
+          addStorageItemsToList(result);
+        });
+      }
+    });
+
+    tr.append(inputKey, inputValue);
     clipboard.append(tr);
   }
 }
