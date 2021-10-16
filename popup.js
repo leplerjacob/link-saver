@@ -1,21 +1,9 @@
-/*  */
-// let key = "type"
-// let value = "What you want to save"
-// let obj = {}
-// obj[key] = value
-// chrome.storage.sync.set(obj), function(){
-//     console.log('Value is set to ' + value)
-// }
-
 /* Get storage items
  */
 chrome.storage.sync.get(null, function (result) {
   // console.log('Value currently is ' + result.key)
   addStorageItemsToList(result);
 });
-
-/* When content loaded get
- */
 
 clipboard = document.querySelector("tbody");
 addBtn = document.getElementById("add");
@@ -28,8 +16,16 @@ addBtn.addEventListener("click", addDetailsInput);
 function insertClip() {}
 
 function addDetailsInput() {
-  convertable.append(input, input2);
-  clipboard.append(convertable);
+  // Allows only one input box to show
+  if (clipboard.querySelector("input.edit")) {
+    return;
+  } else {
+    let tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><input class="input-key edit"/></td><td><input class="input-value edit"/></td>
+    `;
+    clipboard.append(tr);
+  }
 }
 
 function addStorageItemsToList(items) {
@@ -39,17 +35,15 @@ function addStorageItemsToList(items) {
 }
 
 function listItem(key, value) {
-    navigator.clipboard.readText().then(text => {
-        console.log("text: ", text)
-    })
+  // navigator.clipboard.readText().then(text => {
+  //     console.log("text: ", text)
+  // })
   let tr = document.createElement("tr");
   const item = `
-        <td>${key}</td><td>${value}</td>
+        <td><input class="input-key" value="${key}" disabled/></td><td><input class="input-key" value="${value}" disabled/></td>
     `;
   tr.innerHTML = item;
   return tr;
 }
 
-function clipIt(event) {
-    
-}
+function clipIt(event) {}
