@@ -1,9 +1,5 @@
-/* Get storage items
- */
-chrome.storage.sync.get(null, function (result) {
-  // console.log('Value currently is ' + result.key)
-  addStorageItemsToList(result);
-});
+import {getItems} from './store.js'
+
 
 let clipboard = document.querySelector("tbody");
 let addBtn = document.getElementById("add");
@@ -13,7 +9,8 @@ let input2 = document.createElement("input");
 let notify = document.querySelector(".notify");
 addBtn.addEventListener("click", addDetailsInput);
 
-function insertClip() {}
+addStorageItemsToList(await getItems())
+
 
 function addDetailsInput() {
   // Allows only one input box to show
@@ -85,4 +82,8 @@ function copiedAlert() {
     notify.classList.remove("show");
     notify.classList.add("hide");
   }, 2000);
+}
+
+class Storage {
+
 }
