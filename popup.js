@@ -5,12 +5,12 @@ chrome.storage.sync.get(null, function (result) {
   addStorageItemsToList(result);
 });
 
-clipboard = document.querySelector("tbody");
-addBtn = document.getElementById("add");
-convertable = document.createElement("li");
-input = document.createElement("input");
-input2 = document.createElement("input");
-
+let clipboard = document.querySelector("tbody");
+let addBtn = document.getElementById("add");
+let convertable = document.createElement("li");
+let input = document.createElement("input");
+let input2 = document.createElement("input");
+let notify = document.querySelector(".notify");
 addBtn.addEventListener("click", addDetailsInput);
 
 function insertClip() {}
@@ -35,15 +35,33 @@ function addStorageItemsToList(items) {
 }
 
 function listItem(key, value) {
-  // navigator.clipboard.readText().then(text => {
-  //     console.log("text: ", text)
-  // })
   let tr = document.createElement("tr");
-  const item = `
-        <td><input class="input-key" value="${key}" disabled/></td><td><input class="input-key" value="${value}" disabled/></td>
-    `;
-  tr.innerHTML = item;
+  let inputKey = document.createElement("input");
+  inputKey.class = "input-key";
+  inputKey.disabled;
+  inputKey.value = key;
+
+  let inputValue = document.createElement("input");
+  inputValue.addEventListener("click", (e) => {
+    console.log(e.target.value);
+    navigator.clipboard.writeText(e.target.value).then(() => {
+      copiedAlert();
+    });
+  });
+  inputValue.disabled;
+  inputValue.class = "input-value";
+  inputValue.value = value;
+
+  tr.append(inputKey, inputValue);
   return tr;
 }
 
-function clipIt(event) {}
+function copiedAlert() {
+  notify.classList.remove("hide");
+  notify.classList.add("show");
+
+  setTimeout(() => {
+    notify.classList.remove("show");
+    notify.classList.add("hide");
+  }, 5000);
+}
