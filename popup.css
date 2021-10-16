@@ -1,29 +1,67 @@
 :root {
-    --color__bg__primary: #893F04;
-    --color__bg__secondary: #C67F43;
-    --color__font__dark-salmon: #d59b7e;
-    --color__font__tan: #ddb8a6;
-    --color__font__darkseagreen: #979e8a;
-    --color__font__grey-green: #7d886d;
+  --color__bg__primary: #893f04;
+  --color__bg__secondary: #c67f43;
+  --color__bg__wheat: #ecceba;
+  --color__font__dark-salmon: #d59b7e;
+  --color__font__tan: #ddb8a6;
+  --color__font__darkseagreen: #979e8a;
+  --color__font__grey-green: #7d886d;
 
-    --color__border__black: #203929;
+  --color__border__black: #203929;
 }
 
 * {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    padding: 5px;
-    background: var(--color__bg__primary);
-    border: 1px solid red;
+  padding: 5px;
+  background: var(--color__bg__primary);
+  border: 1px solid red;
+  width: 500px;
+  max-width: 400px;
+  max-height: 300px;
+}
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+.clipboard {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(150px, 1.33fr) minmax(150px, 2.33fr);
+}
+
+/* .clipboard td:first-child{
+    padding: 0 1px 0 5px;
+}
+.clipboard td:last-child {
+    padding: 0 5px 0 1px;
+} */
+.clipboard td {
+  margin: 0 2px;
+}
+
+input {
+  width: 100%;
+}
+input:not(.edit):hover {
+  background: var(--color__bg__wheat);
+  cursor: pointer;
 }
 
 #add {
-    height: 16px;
-    width: 16px;
-    border: 1px solid var(--color__border__black);
-    border-radius: 50%;
+  height: 16px;
+  width: 16px;
+  border: 1px solid var(--color__border__black);
+  border-radius: 50%;
+}
+
+#add:hover {
+  background: var(--color__bg__secondary);
 }
