@@ -52,7 +52,6 @@ input {
 }
 input:not(.edit):hover {
   background: var(--color__bg__wheat);
-  cursor: pointer;
 }
 
 #add {
@@ -63,5 +62,50 @@ input:not(.edit):hover {
 }
 
 #add:hover {
+  cursor: pointer;
   background: var(--color__bg__secondary);
+}
+
+.notify.hide {
+  width: 50px;
+  height: 30px;
+  background: yellow;
+  display: none;
+}
+
+.notify.show {
+  animation: show_slide 1s ease forwards;
+}
+
+@keyframes show_slide {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.notify.hide {
+  animation: hide_slide 1s ease forwards;
+}
+
+@keyframes hide_slide {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(10%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
