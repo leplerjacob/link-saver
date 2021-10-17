@@ -20,18 +20,17 @@ export default class UI {
     dataValue.classList.add("input-value");
     dataValue.readOnly = true;
 
-    // Table value event listener
-    dataValue.addEventListener("click", (e) => {
-      navigator.clipboard.writeText(e.target.value).then(() => {
-        UI.copiedAlert();
-      });
-    });
-
     for (const item in items) {
       let cloneKey = dataKey.cloneNode();
       cloneKey.value = item;
       let cloneValue = dataValue.cloneNode();
       cloneValue.value = items[item];
+      // Table value event listener
+      cloneValue.addEventListener("click", (e) => {
+        navigator.clipboard.writeText(e.target.value).then(() => {
+          UI.copiedAlert();
+        });
+      });
       tr.append(cloneKey, cloneValue);
       clipboard.append(tr);
     }
@@ -45,12 +44,16 @@ export default class UI {
     const tr = document.createElement("tr");
     const inputKey = document.createElement("input");
     inputKey.classList.add("input-key", "edit");
+    inputKey.placeholder = "Memo"
 
     let inputValue = document.createElement("input");
     inputValue.classList.add("input-value", "edit");
+    inputValue.placeholder = "What would you like to save?"
 
     if (key && value) {
-      Store.postItem(key, value);
+      // Store.postItem(key, value);
+      inputKey.value = key;
+      inputValue.value = value;
     }
 
     inputValue.addEventListener("keyup", async (e) => {
@@ -75,9 +78,9 @@ export default class UI {
     notify.classList.remove("hide");
     notify.classList.add("show");
 
-    timer = setTimeout(() => {
+    setTimeout(() => {
       notify.classList.remove("show");
       notify.classList.add("hide");
-    }, 2000);
+    }, 3000);
   }
 }
