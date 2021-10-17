@@ -56,9 +56,10 @@ input:not(.edit):hover {
 
 #add {
   height: 32px;
-  width: 32px;
+  width: 80px;
+  margin: auto;
   border: 1px solid var(--color__border__black);
-  border-radius: 50%;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,23 +93,5 @@ input:not(.edit):hover {
   }
   100% {
     transform: translateX(0px);
-  }
-}
-.notify.hide {
-  animation: hide_slide 1s ease forwards;
-}
-
-@keyframes hide_slide {
-  0% {
-    transform: translateX(0px);
-  }
-  40% {
-    transform: translateX(10%);
-  }
-  80% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(100%);
   }
 }
