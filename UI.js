@@ -31,16 +31,17 @@ export default class UI {
       let cloneKey = dataKey.cloneNode();
       cloneKey.value = item;
       let cloneValue = dataValue.cloneNode();
-      cloneValue.value = item;
+      cloneValue.value = items[item];
       tr.append(cloneKey, cloneValue);
       clipboard.append(tr);
     }
   }
 
-  static addInputBoxs(key = "", value = "") {
+  static addInputBoxes(key = "", value = "") {
     if (document.querySelector(".edit")) {
-        return;
+      return;
     }
+    const clipboard = document.querySelector("tbody");
     const tr = document.createElement("tr");
     const inputKey = document.createElement("input");
     inputKey.classList.add("input-key", "edit");
@@ -49,17 +50,28 @@ export default class UI {
     inputValue.classList.add("input-value", "edit");
 
     if (key && value) {
-
+      Store.postItem(key, value);
     }
-    
+
     inputValue.addEventListener("keyup", async (e) => {
       if (inputValue.Value != "" && e.code == "Enter") {
-        Store.postItem();
+        Store.postItem(inputKey.value, inputValue.value);
+        UI.clearItems();
+        UI.getItems();
       }
     });
+
+    tr.append(inputKey, inputValue);
+    clipboard.append(tr);
+  }
+
+  static clearItems() {
+    const clipboard = document.querySelector("tbody");
+    clipboard.innerHTML = "";
   }
 
   static copiedAlert() {
+    let notify = document.querySelector(".notify");
     notify.classList.remove("hide");
     notify.classList.add("show");
 
