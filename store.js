@@ -18,4 +18,15 @@ export default class Store {
         };
     });
   }
+
+  static removeItem(item) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.sync.remove([`${item}`], function (result) {
+        if (chrome.runtime.lastError) {
+          return reject(chrome.runtime.lastError);
+        }
+        resolve(result);
+      });
+    });
+  }
 }
