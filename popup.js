@@ -1,15 +1,23 @@
-import {getItems} from './store.js'
+import LinkSavor from './LinkSavor.js'
+import UI from './UI.js'
 
+UI.getItems()
 
+// created under class
 let clipboard = document.querySelector("tbody");
+// console.log(LinkSavor.getBody())
 let addBtn = document.getElementById("add");
+// LinkSavor.getAddButton()
+
 let convertable = document.createElement("li");
 let input = document.createElement("input");
 let input2 = document.createElement("input");
 let notify = document.querySelector(".notify");
-addBtn.addEventListener("click", addDetailsInput);
+// addBtn.addEventListener("click", addDetailsInput);
+addBtn.addEventListener("click", LinkSavor.addDetailsInput)
 
-addStorageItemsToList(await getItems())
+// addStorageItemsToList(await getItems())
+
 
 
 function addDetailsInput() {
@@ -22,6 +30,7 @@ function addDetailsInput() {
     inputKey.classList.add("input-key", "edit");
     let inputValue = document.createElement("input");
     inputValue.classList.add("input-value", "edit");
+    
     inputValue.addEventListener("keyup", async (e) => {
       if (inputValue.value != "" && e.code == "Enter") {
         await chrome.storage.sync.set(
