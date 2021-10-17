@@ -8,30 +8,36 @@ export default class UI {
 
   static addItemToList(items) {
     const clipboard = document.querySelector("tbody");
-    const tr = document.createElement("tr");
-
-    // Table key
-    let dataKey = document.createElement("input");
-    dataKey.classList.add("input-key");
-    dataKey.readOnly = true;
-
-    // Table value
-    let dataValue = document.createElement("input");
-    dataValue.classList.add("input-value");
-    dataValue.readOnly = true;
-
+    
+    
     for (const item in items) {
-      let cloneKey = dataKey.cloneNode();
-      cloneKey.value = item;
-      let cloneValue = dataValue.cloneNode();
-      cloneValue.value = items[item];
+      const tr = document.createElement("tr");
+      // Table key
+      let dataKey = document.createElement("input");
+      dataKey.classList.add("input-key");
+      dataKey.readOnly = true;
+      dataKey.value = item
+  
+      // Table value
+      let dataValue = document.createElement("input");
+      dataValue.classList.add("input-value");
+      dataValue.readOnly = true;
+      dataValue.value = items[item]
+  
+      let delButton = document.createElement("button")
+      delButton.classList.add("del")
+      delButton.addEventListener("click", (event) => {
+        Store.removeItem(item)
+        UI.clearItems()
+        UI.getItems()
+      })
       // Table value event listener
-      cloneValue.addEventListener("click", (e) => {
+      dataValue.addEventListener("click", (e) => {
         navigator.clipboard.writeText(e.target.value).then(() => {
           UI.copiedAlert();
         });
       });
-      tr.append(cloneKey, cloneValue);
+      tr.append(dataKey, dataValue, delButton);
       clipboard.append(tr);
     }
   }
@@ -48,7 +54,7 @@ export default class UI {
 
     let inputValue = document.createElement("input");
     inputValue.classList.add("input-value", "edit");
-    inputValue.placeholder = "What would you like to save?"
+    inputValue.placeholder = "What would you like to save?";
 
     if (key && value) {
       // Store.postItem(key, value);
