@@ -1,5 +1,7 @@
 # LinkSaver
 
+![image](https://user-images.githubusercontent.com/59655536/138779793-1ae3bac8-dd10-4bad-887a-e3882d9494fe.png)
+
 ## Description
 An app that allows you to easily keep track of saved email addresses, website urls, or any text you find yourself copying often.
 
